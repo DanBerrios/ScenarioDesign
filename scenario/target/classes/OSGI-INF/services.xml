@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<component name="gov.nasa.arc.mct.scenario.component.ActivityComponentProvider" immediate="true">
+		<implementation
+			class="gov.nasa.arc.mct.scenario.component.ActivityComponentProvider" />
+		<service>
+			<provide interface="gov.nasa.arc.mct.services.component.ComponentProvider" />
+		</service>
+	<component>
+	<component
+		name="gov.nasa.arc.mct.scenario.component.ActivityCreationServiceImpl" immediate="true">
+		<implementation
+			class="gov.nasa.arc.mct.scenario.component.ActivityCreationServiceImpl" />
+		<service>
+			<provide interface="gov.nasa.arc.mct.scenario.api.ActivityCreationService" />
+		</service>
+		<reference bind="setComponentRegistry" cardinality="1..1"
+			interface="gov.nasa.arc.mct.services.component.ComponentRegistry"
+			name="ComponentRegistry" policy="static" unbind="removeComponentRegistry" />
+	<component>
+	<component
+		name="gov.nasa.arc.mct.scenario.component.ActivityProviderRegistry">
+		<implementation
+			class="gov.nasa.arc.mct.scenario.component.ActivityProviderRegistry" />
+		<reference name="activityProvider"
+			interface="gov.nasa.arc.mct.scenario.spi.ActivityProvider"
+			cardinality="0..n" policy="dynamic" bind="addProvider" unbind="removeProvider" />
+	<component>
